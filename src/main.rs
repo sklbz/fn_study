@@ -6,5 +6,4 @@ fn main() {
     println!("{hello}");
     
     generate_fn();
-    println!("Hello, world!");
 }
