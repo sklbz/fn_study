@@ -1,12 +1,24 @@
-pub fn generate_fn(first_coefficient: i32, first_derivative_root: i32, second_derivative_root:i32, /* first_value: i32, last_value: i32, */ first_extremum: i32, second_extremum: i32, first_derivative_coefficient: i32) {
+pub fn generate_fn(first_coefficient: i32, second_coefficient: i32, first_derivative_root: i32, second_derivative_root:i32,first_derivative_coefficient: i32) {
+
   let sum_derivative_roots: i32 = first_derivative_root + second_derivative_root;
   let product_derivative_roots: i32 = first_derivative_root * second_derivative_root;
 
   let second_derivative_coefficient: i32 = -first_derivative_coefficient * product_derivative_roots; // calculate b'
-  let third_derivative_coefficient: i32 = first_derivative_coefficient;
-  let mut _b: i32;
-  let mut _c: i32;
-  let mut _d: i32;
-  let mut _e: i32;
-  //print!("{first_coefficient}\n{first_derivative_root}\n{second_derivative_root}\n{first_value}\n{last_value}\n{first_extremum}\n{second_extremum}\n");
+  let third_derivative_coefficient: i32 = first_derivative_coefficient * sum_derivative_roots; // calculate c'
+
+  let b_minus_d: i32 = -first_derivative_coefficient / first_coefficient;
+  let e_minus_c: i32 = second_derivative_coefficient / ( 2 * first_coefficient );
+
+  let third_coefficient: i32 = third_derivative_coefficient / b_minus_d; // calculate c
+  let fifth_coefficient: i32 = e_minus_c + third_coefficient;
+
+  let fourth_coefficient: i32 = second_coefficient - b_minus_d;
+
+
+
+  println!("a:{first_coefficient}");
+  println!("b:{second_coefficient}");
+  println!("c:{third_coefficient}");
+  println!("d:{fourth_coefficient}"); 
+  println!("e:{fifth_coefficient}");
 }
