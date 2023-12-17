@@ -29,11 +29,11 @@ where
 
 fn main() {
     let mut rng = rand::thread_rng();
-    let dist = Filter {
+    let square_filter = Filter {
         dist: Uniform::new_inclusive(-10, 10),
-        test: |x: &_| (x != &0) & (x != &2),
+        test: |x: &_| (x != &0) //// & (x != &2) ,
     };
 
 
-    generate_fn(rng.sample(&dist),rng.sample(&dist),rng.sample(&dist),rng.sample(&dist),rng.sample(&dist));
+    generate_fn(rng.sample(&square_filter),rng.sample(&square_filter),rng.sample(&square_filter),rng.sample(&square_filter),rng.sample(&square_filter));
 }
