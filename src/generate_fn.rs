@@ -73,6 +73,7 @@ pub fn generate_fn(iteration_count: u32) {
 
   // * Start testing with a few conditions
 
+  /*
   let first_extremum: f32 = calculate_function(first_derivative_root);
   let second_extremum: f32 = calculate_function(second_derivative_root);
   let difference: f32 = first_extremum.abs() - second_extremum.abs();
@@ -82,7 +83,8 @@ pub fn generate_fn(iteration_count: u32) {
   || difference.abs() < 3.0 {
     generate_fn(current_iteration);
     return;
-  }
+  };
+  */
   
   println!("a:{first_coefficient}");
   println!("b:{second_coefficient}");
@@ -90,9 +92,9 @@ pub fn generate_fn(iteration_count: u32) {
   println!("d:{fourth_coefficient}"); 
   println!("e:{fifth_coefficient}");
   fn calculate_function(value: i32) -> f32 {
-
-
-    return value as f32;
+    let temp_value: f32 = value as f32;
+    let return_value: f32 = first_coefficient * 
+    return return_value;
   }
 }
 
