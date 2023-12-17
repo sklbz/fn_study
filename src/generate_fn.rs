@@ -41,10 +41,11 @@ fn calculate_function(parameters: &Function<i32>, value: i32) -> f32 {
 
 pub fn generate_fn(iteration_count: u32) {
 
+  let max_iterations: u32 = 3000;
+
   let current_iteration: u32 = iteration_count + 1;
-  if current_iteration > 10000 {
-    println!("too many iterations");
-    return;
+  if current_iteration > max_iterations {
+    panic!("too many iterations");
   }
 
   let mut rng = rand::thread_rng();
@@ -132,3 +133,4 @@ pub fn generate_fn(iteration_count: u32) {
   println!("f(x1):{first_extremum}");
 }
 
+//TODO: Add a system that compare a value with some other values for the fractional part of the extremum
