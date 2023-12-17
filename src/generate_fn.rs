@@ -53,6 +53,7 @@ pub fn generate_fn(iteration_count: u32) {
 
   let current_iteration: u32 = iteration_count + 1;
   if current_iteration > max_iterations {
+    write_stack_overflow();
     panic!("too many iterations");
   }
 
@@ -158,4 +159,17 @@ fn write_data_to_file(data: u32) {
 
 
   f.write(data.as_bytes()).expect("Unable to write data");
+}
+
+fn write_stack_overflow() {
+  let data: String = format!("STACK OVERFLOW\n");
+
+  let mut f: File = OpenOptions::new()
+        .write(true)
+        .append(true)
+        .open("/home/sklbz/maths/fn_study/statistics/iterations.txt")
+        .unwrap();
+
+
+  f.write(data.as_bytes()).expect("Unable to write data"); 
 }
