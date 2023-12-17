@@ -115,8 +115,8 @@ pub fn generate_fn(iteration_count: u32) {
   let second_extremum: f32 = calculate_function(&function, second_derivative_root);
   let difference: f32 = first_extremum.abs() - second_extremum.abs();
 
-  if first_extremum.fract() == 0.0 || first_extremum.abs() > 10.0
-  || second_extremum.fract() == 0.0 || second_extremum.abs() > 10.0
+  if (first_extremum.fract() != 0.0 && first_extremum.fract() != 0.5 && first_extremum.fract() != 0.25) || first_extremum.abs() > 10.0
+  || (second_extremum.fract() != 0.0 && second_extremum.fract() != 0.5 && second_extremum.fract() != 0.25) || second_extremum.abs() > 10.0
   || difference.abs() < 3.0 {
     generate_fn(current_iteration);
     return;
@@ -128,5 +128,7 @@ pub fn generate_fn(iteration_count: u32) {
   println!("c:{third_coefficient}");
   println!("d:{fourth_coefficient}"); 
   println!("e:{fifth_coefficient}");
+  println!("x1:{first_derivative_root}");
+  println!("f(x1):{first_extremum}");
 }
 
