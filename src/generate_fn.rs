@@ -93,7 +93,7 @@ pub fn generate_fn(iteration_count: u32) {
     d: fourth_coefficient,
     e: fifth_coefficient,
   };
-  /* --- */
+
   // * Testing with a few conditions
 
   // * Huge value testing
@@ -103,7 +103,12 @@ pub fn generate_fn(iteration_count: u32) {
   }
   /* --- */
 
-  // * Asymptote
+  // * Asymptote testing
+  let denominator_discriminant: i32 = fourth_coefficient * fourth_coefficient - 4 * first_coefficient * fifth_coefficient;
+  if denominator_discriminant >= 0 {
+    generate_fn(iteration_count);
+    return;
+  }
 
   // * Extremum testing
   let first_extremum: f32 = calculate_function(&function, first_derivative_root);
