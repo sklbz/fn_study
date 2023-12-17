@@ -1,4 +1,37 @@
+use rand::{
+  self,
+  distributions::{Distribution, Uniform},
+  Rng,
+};
+
+struct Filter<Dist, Test> {
+  dist: Dist,
+  test: Test,
+}
+
+impl<T, Dist, Test> Distribution<T> for Filter<Dist, Test>
+where
+  Dist: Distribution<T>,
+  Test: Fn(&T) -> bool,
+{
+  fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> T {
+      loop {
+          let x = self.dist.sample(rng);
+          if (self.test)(&x) {
+              return x;
+          }
+      }
+  }
+}
+
+
 pub fn generate_fn(first_coefficient: i32, second_coefficient: i32, first_derivative_root: i32, second_derivative_root:i32,first_derivative_coefficient: i32) {
+
+  let mut rng = rand::thread_rng();
+    let square_filter = Filter {
+        dist: Uniform::new_inclusive(-10, 10),
+        test: |x: &_| (x != &0) //// & (x != &2) ,
+    };
 
   let sum_derivative_roots: i32 = first_derivative_root + second_derivative_root;
   let product_derivative_roots: i32 = first_derivative_root * second_derivative_root;
