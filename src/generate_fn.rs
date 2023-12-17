@@ -128,12 +128,5 @@ pub fn generate_fn(iteration_count: u32) {
   println!("c:{third_coefficient}");
   println!("d:{fourth_coefficient}"); 
   println!("e:{fifth_coefficient}");
-  /*
-  fn calculate_function(value: i32) -> f32 {
-    let temp_value: f32 = value as f32;
-    let return_value: f32 = &first_coefficient * temp_value;
-    return return_value;
-  }
-  */
 }
 
