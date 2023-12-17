@@ -119,6 +119,7 @@ pub fn generate_fn(iteration_count: u32) {
     generate_fn(current_iteration);
     return;
   }
+  /* --- */
 
   // * Extremum testing
   let first_extremum: f32 = calculate_function(&function, first_derivative_root);
