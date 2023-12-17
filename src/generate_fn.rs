@@ -25,14 +25,10 @@ where
 }
 
 
-pub fn generate_fn(iteration_count: Option<u32>) {
-  let mut current_iteration: u32;
-  match iteration_count {
-    None => current_iteration = 1,
-    Some(iteration_count) => current_iteration = iteration_count + 1,
-  };
+pub fn generate_fn(iteration_count: u32) {
 
-  if current_iteration > 1000 {
+  let current_iteration: u32 = iteration_count + 1;
+  if current_iteration > 10000 {
     println!("too many iterations");
     return;
   }
@@ -67,7 +63,7 @@ pub fn generate_fn(iteration_count: Option<u32>) {
   let e_minus_c: i32 = second_derivative_coefficient / ( 2 * first_coefficient );
 
   if b_minus_d == 0 {
-    generate_fn();
+    generate_fn(current_iteration);
     return;
   }
 
@@ -77,8 +73,14 @@ pub fn generate_fn(iteration_count: Option<u32>) {
 
   // * Start testing with a few conditions
 
-  if (calculate_function(first_derivative_root).fract() == 0.0) {
-    generate_fn();
+  let first_extremum: f32 = calculate_function(first_derivative_root);
+  let second_extremum: f32 = calculate_function(second_derivative_root);
+  let difference: f32 = first_extremum.abs() - second_extremum.abs();
+
+  if first_extremum.fract() == 0.0 || first_extremum.abs() > 10.0
+  || second_extremum.fract() == 0.0 || second_extremum.abs() > 10.0
+  || difference.abs() < 3.0 {
+    generate_fn(current_iteration);
     return;
   }
   

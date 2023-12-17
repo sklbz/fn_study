@@ -4,8 +4,5 @@ use generate_fn::generate_fn;
 
 
 fn main() {
-    
-
-
-    generate_fn();
+    generate_fn(0);
 }
