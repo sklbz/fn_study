@@ -25,7 +25,17 @@ where
 }
 
 
-pub fn generate_fn() {
+pub fn generate_fn(iteration_count: Option<u32>) {
+  let mut current_iteration: u32;
+  match iteration_count {
+    None => current_iteration = 1,
+    Some(iteration_count) => current_iteration = iteration_count + 1,
+  };
+
+  if current_iteration > 1000 {
+    println!("too many iterations");
+    return;
+  }
 
   let mut rng = rand::thread_rng();
   let square_filter = Filter {
