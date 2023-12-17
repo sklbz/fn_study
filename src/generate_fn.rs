@@ -46,7 +46,7 @@ fn compare_fract(value: &f32) -> bool {
 
 pub fn generate_fn(iteration_count: u32) {
 
-  let max_iterations: u32 = 3000;
+  let max_iterations: u32 = 6000;
 
   let current_iteration: u32 = iteration_count + 1;
   if current_iteration > max_iterations {
@@ -104,7 +104,7 @@ pub fn generate_fn(iteration_count: u32) {
 
   // * Huge value testing
   if third_coefficient.abs() > 15 || fourth_coefficient.abs() > 15  || fifth_coefficient.abs() > 15 {
-    generate_fn(iteration_count);
+    generate_fn(current_iteration);
     return;
   }
   /* --- */
@@ -112,7 +112,7 @@ pub fn generate_fn(iteration_count: u32) {
   // * Asymptote testing
   let denominator_discriminant: i32 = fourth_coefficient * fourth_coefficient - 4 * first_coefficient * fifth_coefficient;
   if denominator_discriminant >= 0 {
-    generate_fn(iteration_count);
+    generate_fn(current_iteration);
     return;
   }
 
@@ -136,6 +136,7 @@ pub fn generate_fn(iteration_count: u32) {
   println!("e:{fifth_coefficient}");
   println!("x1:{first_derivative_root}");
   println!("f(x1):{first_extremum}");
+  println!("x2:{second_derivative_root}");
+  println!("f(x2):{second_extremum}");
+  println!("Δ:{denominator_discriminant}")
 }
-
-//TODO: Add a system that compare a value with some other values for the fractional part of the extremum
