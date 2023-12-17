@@ -1,3 +1,6 @@
+use std::fs::File;
+use std::fs::OpenOptions;
+use std::io::Write;
 use rand::{
   self,
   distributions::{Distribution, Uniform},
@@ -139,5 +142,20 @@ pub fn generate_fn(iteration_count: u32) {
   println!("f(x1):{first_extremum}");
   println!("x2:{second_derivative_root}");
   println!("f(x2):{second_extremum}");
-  println!("Δ:{denominator_discriminant}")
+  println!("Δ:{denominator_discriminant}");
+
+  write_data_to_file(current_iteration);
+}
+
+fn write_data_to_file(data: u32) {
+  let data: String = format!("{data}\n");
+
+  let mut f: File = OpenOptions::new()
+        .write(true)
+        .append(true)
+        .open("/home/sklbz/maths/fn_study/statistics/iterations.txt")
+        .unwrap();
+
+
+  f.write(data.as_bytes()).expect("Unable to write data");
 }
