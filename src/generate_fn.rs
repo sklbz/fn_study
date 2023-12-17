@@ -129,6 +129,7 @@ pub fn generate_fn(iteration_count: u32) {
   };
   /* --- */
   
+  println!("{current_iteration}");
   println!("a:{first_coefficient}");
   println!("b:{second_coefficient}");
   println!("c:{third_coefficient}");
