@@ -38,6 +38,11 @@ fn calculate_function(parameters: &Function<i32>, value: i32) -> f32 {
   return numerator as f32 / denominator as f32;
 }
 
+fn compare_fract(value: &f32) -> bool {
+  let decimal: f32 = value.fract();
+  return decimal != 0.0 && decimal != 0.1 && decimal != 0.2 && decimal != 0.25 && decimal != 0.3 && decimal != 0.4 && decimal != 0.5 && decimal != 0.6 && decimal != 0.7 && decimal != 0.75 && decimal != 0.8 && decimal != 0.9;
+}
+
 
 pub fn generate_fn(iteration_count: u32) {
 
@@ -116,8 +121,8 @@ pub fn generate_fn(iteration_count: u32) {
   let second_extremum: f32 = calculate_function(&function, second_derivative_root);
   let difference: f32 = first_extremum.abs() - second_extremum.abs();
 
-  if (first_extremum.fract() != 0.0 && first_extremum.fract() != 0.5 && first_extremum.fract() != 0.25) || first_extremum.abs() > 10.0
-  || (second_extremum.fract() != 0.0 && second_extremum.fract() != 0.5 && second_extremum.fract() != 0.25) || second_extremum.abs() > 10.0
+  if compare_fract(&first_extremum) || first_extremum.abs() > 10.0
+  || compare_fract(&second_extremum) || second_extremum.abs() > 10.0
   || difference.abs() < 3.0 {
     generate_fn(current_iteration);
     return;
