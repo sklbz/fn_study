@@ -24,6 +24,20 @@ where
   }
 }
 
+struct Function<I32> {
+  a: I32,
+  b: I32,
+  c: I32,
+  d: I32,
+  e: I32,
+}
+
+fn calculate_function(parameters: &Function<i32>, value: i32) -> f32 {
+  let numerator: i32 = value * value * parameters.a + value * parameters.b + parameters.c;
+  let denominator: i32 = value * value * parameters.a + value * parameters.d + parameters.e;
+  return numerator as f32 / denominator as f32;
+}
+
 
 pub fn generate_fn(iteration_count: u32) {
 
@@ -71,11 +85,29 @@ pub fn generate_fn(iteration_count: u32) {
   let fourth_coefficient: i32 = second_coefficient - b_minus_d; // calculate d
   let fifth_coefficient: i32 = e_minus_c + third_coefficient; // calculate e
 
-  // * Start testing with a few conditions
+  // * creating a function
+  let function = Function {
+    a: first_coefficient,
+    b: second_coefficient,
+    c: third_coefficient,
+    d: fourth_coefficient,
+    e: fifth_coefficient,
+  };
+  /* --- */
+  // * Testing with a few conditions
 
-  /*
-  let first_extremum: f32 = calculate_function(first_derivative_root);
-  let second_extremum: f32 = calculate_function(second_derivative_root);
+  // * Huge value testing
+  if third_coefficient.abs() > 15 || fourth_coefficient.abs() > 15  || fifth_coefficient.abs() > 15 {
+    generate_fn(iteration_count);
+    return;
+  }
+  /* --- */
+
+  // * Asymptote
+
+  // * Extremum testing
+  let first_extremum: f32 = calculate_function(&function, first_derivative_root);
+  let second_extremum: f32 = calculate_function(&function, second_derivative_root);
   let difference: f32 = first_extremum.abs() - second_extremum.abs();
 
   if first_extremum.fract() == 0.0 || first_extremum.abs() > 10.0
@@ -84,17 +116,19 @@ pub fn generate_fn(iteration_count: u32) {
     generate_fn(current_iteration);
     return;
   };
-  */
+  /* --- */
   
   println!("a:{first_coefficient}");
   println!("b:{second_coefficient}");
   println!("c:{third_coefficient}");
   println!("d:{fourth_coefficient}"); 
   println!("e:{fifth_coefficient}");
+  /*
   fn calculate_function(value: i32) -> f32 {
     let temp_value: f32 = value as f32;
-    let return_value: f32 = first_coefficient * 
+    let return_value: f32 = &first_coefficient * temp_value;
     return return_value;
   }
+  */
 }
 
