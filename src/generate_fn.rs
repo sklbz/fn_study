@@ -46,7 +46,7 @@ fn compare_fract(value: &f32) -> bool {
 
 pub fn generate_fn(iteration_count: u32) {
 
-  let max_iterations: u32 = 6000;
+  let max_iterations: u32 = 5000;
 
   let current_iteration: u32 = iteration_count + 1;
   if current_iteration > max_iterations {
