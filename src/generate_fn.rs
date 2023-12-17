@@ -28,16 +28,24 @@ where
 pub fn generate_fn() {
 
   let mut rng = rand::thread_rng();
-    let square_filter = Filter {
-        dist: Uniform::new_inclusive(-10, 10),
-        test: |x: &_| (x != &0),
-    };
+  let square_filter = Filter {
+    dist: Uniform::new_inclusive(-10, 10),
+    test: |x: &_| (x != &0),
+  };
+  
 
-    let first_coefficient: i32 = rng.sample(&square_filter); 
-    let second_coefficient: i32;
-    let first_derivative_root: i32;
-    let second_derivative_root:i32;
-    let first_derivative_coefficient: i32;
+  let first_coefficient: i32 = rng.sample(&square_filter); 
+  let second_coefficient: i32 = rng.sample(&square_filter);
+  let first_derivative_coefficient: i32 = rng.sample(&square_filter);
+  let first_derivative_root: i32 = rng.sample(&square_filter);
+
+  let root_filter = Filter {
+    dist: Uniform::new_inclusive(-10, 10),
+    test: |x: &_| (x != &first_derivative_root),
+  };
+
+  let second_derivative_root:i32 = rng.sample(&root_filter);
+  
 
   let sum_derivative_roots: i32 = first_derivative_root + second_derivative_root;
   let product_derivative_roots: i32 = first_derivative_root * second_derivative_root;
@@ -48,16 +56,31 @@ pub fn generate_fn() {
   let b_minus_d: i32 = -first_derivative_coefficient / first_coefficient;
   let e_minus_c: i32 = second_derivative_coefficient / ( 2 * first_coefficient );
 
+  if b_minus_d == 0 {
+    generate_fn();
+    return;
+  }
+
   let third_coefficient: i32 = third_derivative_coefficient / b_minus_d; // calculate c
-  let fifth_coefficient: i32 = e_minus_c + third_coefficient;
+  let fourth_coefficient: i32 = second_coefficient - b_minus_d; // calculate d
+  let fifth_coefficient: i32 = e_minus_c + third_coefficient; // calculate e
 
-  let fourth_coefficient: i32 = second_coefficient - b_minus_d;
+  // * Start testing with a few conditions
 
-
-
+  if (calculate_function(first_derivative_root).fract() == 0.0) {
+    generate_fn();
+    return;
+  }
+  
   println!("a:{first_coefficient}");
   println!("b:{second_coefficient}");
   println!("c:{third_coefficient}");
   println!("d:{fourth_coefficient}"); 
   println!("e:{fifth_coefficient}");
+  fn calculate_function(value: i32) -> f32 {
+
+
+    return value as f32;
+  }
 }
+
