@@ -33,7 +33,7 @@ pub fn generate_fn() {
         test: |x: &_| (x != &0),
     };
 
-    let first_coefficient: i32 = rng::sample(&square_filter); 
+    let first_coefficient: i32 = rng.sample(&square_filter); 
     let second_coefficient: i32;
     let first_derivative_root: i32;
     let second_derivative_root:i32;
