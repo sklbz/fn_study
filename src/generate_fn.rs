@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::fs::OpenOptions;
 use std::io::Write;
-use tailcall::tailcall;
+//use tailcall::tailcall;
 use rand::{
   self,
   distributions::{Distribution, Uniform},
@@ -49,7 +49,7 @@ fn compare_fract(value: &f32) -> bool {
 
 
 pub fn generate_fn() {
-  #[tailcall]
+  // ?#[tailcall]
   fn generate_fn_inner(iteration_count: u32) -> u64 {
     let max_iterations: u32 = 5000;
 
@@ -67,7 +67,7 @@ pub fn generate_fn() {
     
 
     let first_coefficient: i32 = rng.sample(&square_filter); 
-    let second_coefficient: i32 = rng.sample(&square_filter);
+    let second_numerator_coefficient: i32 = rng.sample(&square_filter);
     let first_derivative_coefficient: i32 = rng.sample(&square_filter);
     let first_derivative_root: i32 = rng.sample(&square_filter);
 
@@ -90,17 +90,17 @@ pub fn generate_fn() {
 
     if b_minus_d == 0 {
       generate_fn_inner(current_iteration);
-      // ?return;?
+      return 1;
     }
 
     let third_coefficient: i32 = third_derivative_coefficient / b_minus_d; // calculate c
-    let fourth_coefficient: i32 = second_coefficient - b_minus_d; // calculate d
+    let fourth_coefficient: i32 = second_numerator_coefficient - b_minus_d; // calculate d
     let fifth_coefficient: i32 = e_minus_c + third_coefficient; // calculate e
 
     // * creating a function
     let function = Function {
       a: first_coefficient,
-      b: second_coefficient,
+      b: second_numerator_coefficient,
       c: third_coefficient,
       d: fourth_coefficient,
       e: fifth_coefficient,
@@ -108,10 +108,17 @@ pub fn generate_fn() {
 
     // * Testing with a few conditions
 
-    // * Huge value testing
+    // * High value testing
     if third_coefficient.abs() > 15 || fourth_coefficient.abs() > 15  || fifth_coefficient.abs() > 15 {
       generate_fn_inner(current_iteration);
-      //?return;?
+      return 1;
+    }
+    // * derivative high value testing
+    let second_derivative_coefficient: i32 = 2 * first_coefficient * e_minus_c;
+    let third_derivative_coefficient: i32 = second_numerator_coefficient * fifth_coefficient - fourth_coefficient * third_coefficient;
+    if second_derivative_coefficient.abs() > 20 || third_derivative_coefficient.abs() > 20 {
+      generate_fn_inner(current_iteration);
+      return 1;
     }
     /* --- */
 
@@ -119,7 +126,7 @@ pub fn generate_fn() {
     let denominator_discriminant: i32 = fourth_coefficient * fourth_coefficient - 4 * first_coefficient * fifth_coefficient;
     if denominator_discriminant >= 0 {
       generate_fn_inner(current_iteration);
-      // ?return;?
+      return 1;
     }
     /* --- */
 
@@ -132,13 +139,13 @@ pub fn generate_fn() {
     || compare_fract(&second_extremum) || second_extremum.abs() > 10.0
     || difference.abs() < 3.0 {
       generate_fn_inner(current_iteration);
-      // ?return;?
+      return 1;
     };
     /* --- */
     
     println!("{current_iteration}");
     println!("a:{first_coefficient}");
-    println!("b:{second_coefficient}");
+    println!("b:{second_numerator_coefficient}");
     println!("c:{third_coefficient}");
     println!("d:{fourth_coefficient}"); 
     println!("e:{fifth_coefficient}");
