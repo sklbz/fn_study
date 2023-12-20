@@ -89,8 +89,7 @@ pub fn generate_fn() {
     let e_minus_c: i32 = second_derivative_coefficient / ( 2 * first_coefficient );
 
     if b_minus_d == 0 {
-      generate_fn_inner(current_iteration);
-      return 1;
+      return generate_fn_inner(current_iteration);
     }
 
     let third_coefficient: i32 = third_derivative_coefficient / b_minus_d; // calculate c
@@ -110,23 +109,20 @@ pub fn generate_fn() {
 
     // * High value testing
     if third_coefficient.abs() > 15 || fourth_coefficient.abs() > 15  || fifth_coefficient.abs() > 15 {
-      generate_fn_inner(current_iteration);
-      return 1;
+      return generate_fn_inner(current_iteration);
     }
     // * Derivative high value testing
     let second_derivative_coefficient: i32 = 2 * first_coefficient * e_minus_c;
     let third_derivative_coefficient: i32 = second_numerator_coefficient * fifth_coefficient - fourth_coefficient * third_coefficient;
     if second_derivative_coefficient.abs() > 20 || third_derivative_coefficient.abs() > 20 {
-      generate_fn_inner(current_iteration);
-      return 1;
+      return generate_fn_inner(current_iteration);
     }
     /* --- */
 
     // * Asymptote testing
     let denominator_discriminant: i32 = fourth_coefficient * fourth_coefficient - 4 * first_coefficient * fifth_coefficient;
     if denominator_discriminant >= 0 {
-      generate_fn_inner(current_iteration);
-      return 1;
+      return generate_fn_inner(current_iteration);
     }
     /* --- */
 
@@ -138,8 +134,7 @@ pub fn generate_fn() {
     if compare_fract(&first_extremum) || first_extremum.abs() > 10.0
     || compare_fract(&second_extremum) || second_extremum.abs() > 10.0
     || difference.abs() < 3.0 {
-      generate_fn_inner(current_iteration);
-      return 1;
+      return generate_fn_inner(current_iteration);
     };
     /* --- */
     
@@ -149,11 +144,11 @@ pub fn generate_fn() {
     println!("c:{third_coefficient}");
     println!("d:{fourth_coefficient}"); 
     println!("e:{fifth_coefficient}");
-    println!("x1:{first_derivative_root}");
+    /*println!("x1:{first_derivative_root}");
     println!("f(x1):{first_extremum}");
     println!("x2:{second_derivative_root}");
     println!("f(x2):{second_extremum}");
-    println!("Δ:{denominator_discriminant}");
+    println!("Δ:{denominator_discriminant}");*/
 
     write_data_to_file(current_iteration);
 
