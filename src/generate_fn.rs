@@ -113,7 +113,7 @@ pub fn generate_fn() {
       generate_fn_inner(current_iteration);
       return 1;
     }
-    // * derivative high value testing
+    // * Derivative high value testing
     let second_derivative_coefficient: i32 = 2 * first_coefficient * e_minus_c;
     let third_derivative_coefficient: i32 = second_numerator_coefficient * fifth_coefficient - fourth_coefficient * third_coefficient;
     if second_derivative_coefficient.abs() > 20 || third_derivative_coefficient.abs() > 20 {
@@ -188,4 +188,4 @@ fn write_stack_overflow() {
 
   f.write(data.as_bytes()).expect("Unable to write data"); 
 }
-//TODO: Add tailcall optimisation
+//TODO: Add tailcall optimization
