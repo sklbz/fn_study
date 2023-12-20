@@ -51,7 +51,7 @@ fn compare_fract(value: &f32) -> bool {
 pub fn generate_fn() {
   // ?#[tailcall]
   fn generate_fn_inner(iteration_count: u32) -> u64 {
-    let max_iterations: u32 = 5000;
+    let max_iterations: u32 = 3000;
 
     let current_iteration: u32 = iteration_count + 1;
     if current_iteration > max_iterations {
@@ -144,11 +144,11 @@ pub fn generate_fn() {
     println!("c:{third_coefficient}");
     println!("d:{fourth_coefficient}"); 
     println!("e:{fifth_coefficient}");
-    /*println!("x1:{first_derivative_root}");
+    println!("x1:{first_derivative_root}");
     println!("f(x1):{first_extremum}");
     println!("x2:{second_derivative_root}");
     println!("f(x2):{second_extremum}");
-    println!("Δ:{denominator_discriminant}");*/
+    println!("Δ:{denominator_discriminant}");
 
     write_data_to_file(current_iteration);
 
